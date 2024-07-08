@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Add Complaint</title>
+<style>
+body {
+	font-family: Arial, sans-serif;
+	background-color: lavender;
+	margin: 0;
+	padding: 20px;
+}
+
+h1 {
+	text-align: center;
+	color: #333;
+}
+
+form {
+	max-width: 600px;
+	margin: 20px auto;
+	padding: 20px;
+	background-color: #fff;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	border-radius: 8px;
+}
+
+label {
+	display: block;
+	margin-bottom: 8px;
+	font-weight: bold;
+	color: #333;
+}
+
+input, textarea, select {
+	width: 100%;
+	padding: 10px;
+	margin-bottom: 20px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	font-size: 16px;
+	box-sizing: border-box;
+}
+
+textarea {
+	resize: vertical;
+	height: 100px;
+}
+
+button {
+	display: block;
+	width: 100%;
+	padding: 12px;
+	background-color: #007bff;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	font-size: 18px;
+	cursor: pointer;
+}
+
+button:hover {
+	background-color: #0056b3;
+}
+
+.error-message {
+	color: red;
+	font-size: 14px;
+	margin-bottom: 20px;
+}
+</style>
+</head>
+<body>
+	<div class="container">
+		<h1>Add Complaint</h1>
+		<form th:action="@{/complaints/add}" th:object="${complaint}"
+			method="post" enctype="multipart/form-data">
+			<select id="project" th:field="*{projectId}">
+				<option th:each="project : ${projects}" th:value="${project.id}"
+					th:text="${project.projectName}"></option>
+			</select> <select id="ticketCategory" th:field="*{ticketCategoryId}">
+				<option th:each="ticketCategory : ${ticketCategories}"
+					th:value="${ticketCategory.id}"
+					th:text="${ticketCategory.ticketName}"></option>
+			</select> <label for="moduleName">Module Name:</label> <input type="text"
+				id="moduleName" th:field="*{moduleName}"
+				placeholder="Enter module name" /> <label for="subModuleName">Sub-Module
+				Name:</label> <input type="text" id="subModuleName"
+				th:field="*{subModuleName}" placeholder="Enter sub-module name" />
+
+			<label for="frequency">Frequency:</label> <input type="text"
+				id="frequency" th:field="*{frequency}" placeholder="Enter frequency" />
+
+			<label for="priority">Priority:</label> <select id="priority"
+				name="priority" required>
+				<option value="High">High</option>
+				<option value="Medium">Medium</option>
+				<option value="Low">Low</option>
+			</select> <label for="issueDescription">Issue Description:</label>
+			<textarea id="issueDescription" th:field="*{issueDescription}"
+				placeholder="Describe the issue"></textarea>
+
+			<label for="attachment">Issue Image:</label> <input type="file"
+				id="attachment" name="attachment" />
+
+			<button type="submit">Submit</button>
+		</form>
+	</div>
+</body>
+</html>
+
+<!-- <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Complaint</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        header {
+            background: #333;
+            color: #fff;
+            padding-top: 30px;
+            min-height: 70px;
+            border-bottom: #777 3px solid;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            padding: 0;
+            font-size: 2em;
+        }
+
+        form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .form-group button {
+            background: #333;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Add Complaint</h1>
+        </div>
+    </header>
+
+    <div class="container">
+        <form th:action="@{/complaints/add}" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title" required>
+            </div>
+
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <textarea id="description" name="description" rows="4" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="moduleName">Module Name:</label>
+                <input type="text" id="moduleName" name="moduleName" required>
+            </div>
+
+            <div class="form-group">
+                <label for="project">Project:</label>
+                <select id="project" name="projectId" required>
+                    <option value="">Select Project</option>
+                    <option th:each="project : ${projects}" th:value="${project.id}" th:text="${project.projectName}"></option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="ticketCategory">Ticket Category:</label>
+                <select id="ticketCategory" name="ticketCategoryId" required>
+                    <option value="">Select Ticket Category</option>
+                    <option th:each="ticketCategory : ${ticketCategories}" th:value="${ticketCategory.id}" th:text="${ticketCategory.ticketName}"></option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="priority">Priority:</label>
+                <select id="priority" name="priority" required>
+                    <option value="High">High</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Low">Low</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="attachment">Attachment:</label>
+                <input type="file" id="attachment" name="attachment">
+            </div>
+
+            <div class="form-group">
+                <button type="submit">Submit Complaint</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html> -->

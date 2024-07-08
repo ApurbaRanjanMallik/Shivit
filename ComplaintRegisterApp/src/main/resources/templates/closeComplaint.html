@@ -1,0 +1,79 @@
+<!-- <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Close Complaint</title>
+</head>
+<body>
+    <h1>Close Complaint</h1>
+    <form th:action="@{/complaints/close/{id}(id=${complaint.id})}" method="post">
+        <label for="updatedBy">Updated By:</label>
+        <input type="text" id="updatedBy" name="updatedBy" /><br>
+        <button type="submit">Close</button>
+    </form>
+</body>
+</html>
+ -->
+ <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Close Complaint</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: bold;
+        }
+        input[type="text"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <form th:action="@{/complaints/close/{id}(id=${complaint.id})}" method="post">
+        <h1>Close Complaint</h1>
+        <label for="updatedBy">Updated By:</label>
+        <input type="text" id="updatedBy" name="updatedBy" required />
+        <button type="submit">Close</button>
+    </form>
+</body>
+</html>
+ 

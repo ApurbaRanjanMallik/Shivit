@@ -9,6 +9,9 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -27,12 +30,18 @@ public class Complaint {
 	@Column(name = "date", nullable = false)
 	private LocalDateTime date;
 
-	@Column(name = "project_name", nullable = false)
-	private String projectName;
+	@ManyToOne
+	@JoinColumn(name = "project_id", referencedColumnName = "id")
+	private ProjectMaster project;
+
+	@ManyToOne
+	@JoinColumn(name = "ticket_id", referencedColumnName = "id")
+	private TicketCategory ticketCategory;
 
 	@Column(name = "module_name", nullable = false)
 	private String moduleName;
 
+	
 	@Column(name = "sub_module_name", nullable = false)
 	private String subModuleName;
 
@@ -48,6 +57,10 @@ public class Complaint {
 	@Enumerated(EnumType.STRING)
 	@Column(name = "status", nullable = false)
 	private Status status;
+
+	@Lob
+	@Column(name = "image", columnDefinition = "LONGBLOB")
+	private byte[] image;
 
 	public enum Status {
 		NEW, ASSIGNED, RESOLVED, CLOSED

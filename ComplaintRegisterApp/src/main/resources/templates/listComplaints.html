@@ -1,0 +1,131 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Complaints List</title>
+<style>
+body {
+	font-family: Arial, sans-serif;
+	background-color: lavender;
+	margin: 0;
+	padding: 20px;
+}
+
+.header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 20px;
+}
+
+.header h1 {
+	margin: 0;
+	color: black;
+}
+
+.header .register-link {
+	font-size: 18px;
+	font-weight: bold;
+	color: #007bff;
+	text-decoration: none;
+}
+
+.header .register-link:hover {
+	text-decoration: underline;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	background-color: #fff;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	margin-bottom: 20px;
+	border-radius: 8px;
+	overflow: hidden;
+}
+
+thead {
+	background-color: blue;
+	color: white;
+}
+
+th, td {
+	padding: 15px;
+	text-align: left;
+	border-bottom: 1px solid #ddd;
+}
+
+th {
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+tbody tr:hover {
+	background-color: #f1f1f1;
+}
+
+.actions {
+	display: flex;
+	gap: 10px;
+}
+
+.action-link {
+	background-color: #007bff;
+	color: white;
+	padding: 5px 10px;
+	border-radius: 4px;
+	text-align: center;
+	text-decoration: none;
+}
+
+.action-link:hover {
+	background-color: #0056b3;
+}
+</style>
+</head>
+<body>
+	<div class="header">
+		<h1>Complaints List</h1>
+		<a href="/complaints/registerform" class="register-link"><button
+				type="button">
+				<h3>Register</h3>
+			</button></a>
+	</div>
+
+	<table>
+		<thead>
+			<tr>
+				<th>Ticket Number</th>
+				<th>Project</th>
+				<th>Module Name</th>
+				<th>Ticket Category</th>
+				<th>Status</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="complaint : ${complaints}">
+				<td th:text="${complaint.ticketNumber}"></td>
+				<td
+					th:text="${complaint.project != null ? complaint.project.projectName : 'N/A'}"></td>
+				<td
+					th:text="${complaint.ticketCategory != null ? complaint.ticketCategory.ticketName : 'N/A'}"></td>
+				<td th:text="${complaint.moduleName}"></td>
+				<td th:text="${complaint.status}"></td>
+				<td class="actions"><a
+					th:href="@{/complaints/{id}(id=${complaint.id})}"
+					class="action-link">View</a> <a
+					th:href="@{/complaints/history/{id}(id=${complaint.id})}"
+					class="action-link">History</a> <a
+					th:href="@{/complaints/update-statusform/{id}(id=${complaint.id})}"
+					class="action-link">Update Status</a> <a
+					th:href="@{/complaints/closeform/{id}(id=${complaint.id})}"
+					class="action-link">Close</a></td>
+			</tr>
+		</tbody>
+	</table>
+	<div>
+		<a th:href="@{/complaints/app}" class="action-link">Back</a>
+	</div>
+</body>
+</html>

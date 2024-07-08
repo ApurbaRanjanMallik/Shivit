@@ -1,0 +1,103 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>View Complaint</title>
+<style>
+body {
+	font-family: Arial, sans-serif;
+	background-color: #f4f4f9;
+	margin: 0;
+	padding: 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+}
+
+h1 {
+	text-align: center;
+	color: #333;
+}
+
+.container {
+	background-color: #fff;
+	padding: 20px;
+	border-radius: 8px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	max-width: 600px;
+	width: 100%;
+}
+
+p {
+	margin: 10px 0;
+	color: #555;
+}
+
+p strong {
+	color: #333;
+}
+
+.detail {
+	background-color: #eef;
+	padding: 10px;
+	border-radius: 4px;
+}
+</style>
+</head>
+<body>
+	<div class="container">
+		<h1>Complaint Details</h1>
+		<p>
+			<strong>Ticket Number:</strong> <span class="detail"
+				th:text="${complaint.ticketNumber}"></span>
+		</p>
+		<p>
+			<strong>Project Name:</strong> <span class="detail"
+				th:text="${complaint.project != null ? complaint.project.projectName : 'N/A'}"></span>
+		</p>
+		<p>
+			<strong>Ticket Category:</strong> <span class="detail"
+				th:text="${complaint.ticketCategory != null ? complaint.ticketCategory.ticketName : 'N/A'}"></span>
+		</p>
+		<p>
+			<strong>Module Name:</strong> <span class="detail"
+				th:text="${complaint.moduleName}"></span>
+		</p>
+		<p>
+			<strong>Sub Module Name:</strong> <span class="detail"
+				th:text="${complaint.subModuleName}"></span>
+		</p>
+		<p>
+			<strong>Frequency:</strong> <span class="detail"
+				th:text="${complaint.frequency}"></span>
+		</p>
+		<p>
+			<strong>Priority:</strong> <span class="detail"
+				th:text="${complaint.priority}"></span>
+		</p>
+		<p>
+			<strong>Issue Description:</strong> <span class="detail"
+				th:text="${complaint.issueDescription}"></span>
+		</p>
+		<p>
+			<strong>Status:</strong> <span class="detail"
+				th:text="${complaint.status}"></span>
+		</p>
+		<!-- Display the image if it exists -->
+		<div th:if="${complaint.image != null}">
+			<p>
+				<strong>Image:</strong>
+			</p>
+			<img th:src="'data:image/jpeg;base64,' + ${imageAsBase64}"
+				width="600" height="400" />
+		</div>
+
+		<div>
+			<a th:href="@{/complaints/list}" class="action-link"><button
+					type="button">Back</button></a>
+		</div>
+
+	</div>
+</body>
+</html>

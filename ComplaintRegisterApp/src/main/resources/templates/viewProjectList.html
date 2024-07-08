@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Project List</title>
+<style>
+body {
+	font-family: Arial, sans-serif;
+	background-color: lavender;
+	margin: 0;
+	padding: 20px;
+}
+
+h1 {
+	text-align: center;
+	color: black;
+	margin-bottom: 20px;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	background-color: #fff;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	margin-bottom: 20px;
+	border-radius: 8px;
+	overflow: hidden;
+}
+
+thead {
+	background-color: blue;
+	color: white;
+}
+
+th, td {
+	padding: 15px;
+	text-align: left;
+	border-bottom: 1px solid #ddd;
+}
+
+th {
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+tbody tr:hover {
+	background-color: #f1f1f1;
+}
+
+a {
+	color: #007bff;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+.actions {
+	display: flex;
+	gap: 10px;
+}
+
+.action-link {
+	background-color: #007bff;
+	color: white;
+	padding: 5px 10px;
+	border-radius: 4px;
+	text-align: center;
+}
+
+.action-link:hover {
+	background-color: #0056b3;
+}
+</style>
+</head>
+<body>
+	<div class="header">
+		<h1>Project List</h1>
+		<a href="/projectmaster/addform" class="register-link"><button
+				type="button">
+				<h3>Add Project</h3>
+			</button></a>
+	</div>
+	<br>
+	<table>
+		<thead>
+			<tr>
+				<th>Project Name</th>
+				<th>Project Description</th>
+				<th>Project Status</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="project : ${projects}">
+				<td th:text="${project.projectName}"></td>
+				<td th:text="${project.projectDescription}"></td>
+				<td th:text="${project.projectStatus}"></td>
+				<td class="actions"><a
+					th:href="@{/projectmaster/delete/{id}(id=${project.id})}"
+					class="action-link">Delete</a></td>
+			</tr>
+		</tbody>
+	</table>
+	<div>
+		<a th:href="@{/complaints/app}" class="action-link">Back</a>
+	</div>
+</body>
+</html>
