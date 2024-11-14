@@ -47,7 +47,7 @@ public class ProjectMasterController {
 		model.addAttribute("projectMaster", new ProjectMaster());
 		return new ModelAndView("addProject", model);
 	}
-	
+
 	@GetMapping("/delete/{id}")
 	public ModelAndView deleteProject(@PathVariable Long id) {
 	    projectMasterService.deleteProject(id);

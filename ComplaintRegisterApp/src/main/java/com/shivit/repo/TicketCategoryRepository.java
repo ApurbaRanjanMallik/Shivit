@@ -6,5 +6,5 @@ import com.shivit.entity.TicketCategory;
 
 public interface TicketCategoryRepository extends JpaRepository<TicketCategory, Long> {
 
-	
+
 }

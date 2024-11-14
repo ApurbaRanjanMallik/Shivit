@@ -41,7 +41,7 @@ public class Complaint {
 	@Column(name = "module_name", nullable = false)
 	private String moduleName;
 
-	
+
 	@Column(name = "sub_module_name", nullable = false)
 	private String subModuleName;
 

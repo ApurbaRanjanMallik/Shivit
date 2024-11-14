@@ -159,7 +159,7 @@ public class ComplaintController {
 		model.addAttribute("history", history);
 		return new ModelAndView("viewComplaintHistory", model);
 	}
-	
+
 	@GetMapping("/report")
 	public ModelAndView getComplaintReport(
 	        @RequestParam(value = "status", required = false) String status,

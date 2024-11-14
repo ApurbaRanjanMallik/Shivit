@@ -8,7 +8,7 @@ public interface ProjectMasterRepository extends JpaRepository<ProjectMaster, Lo
 
 //	@Query("SELECT new com.shivit.dto.CommonDropDownResponse(id, projectName) from ProjectMaster where projectStatus=:status")
 //	public List<CommonDropDownResponse> getSelectionList(Status status);
-//	
-	
+//
+
 
 }
