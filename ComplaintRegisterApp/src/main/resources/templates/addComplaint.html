@@ -74,14 +74,31 @@ button:hover {
 		<h1>Add Complaint</h1>
 		<form th:action="@{/complaints/add}" th:object="${complaint}"
 			method="post" enctype="multipart/form-data">
-			<select id="project" th:field="*{projectId}">
-				<option th:each="project : ${projects}" th:value="${project.id}"
-					th:text="${project.projectName}"></option>
-			</select> <select id="ticketCategory" th:field="*{ticketCategoryId}">
-				<option th:each="ticketCategory : ${ticketCategories}"
-					th:value="${ticketCategory.id}"
-					th:text="${ticketCategory.ticketName}"></option>
-			</select> <label for="moduleName">Module Name:</label> <input type="text"
+			<!-- <label for="moduleName">Project:</label>
+				<select id="project" th:field="*{projectId}">
+					<option th:each="project : ${projects}" th:value="${project.id}"
+						th:text="${project.projectName}">
+					</option>
+				</select> 
+			<label for="moduleName">Ticket Category:</label>
+				<select id="ticketCategory" th:field="*{ticketCategoryId}">
+					<option th:each="ticketCategory : ${ticketCategories}"
+						th:value="${ticketCategory.id}"
+						th:text="${ticketCategory.ticketName}">
+					</option>
+				</select>  -->
+			<label for="project">Project:</label>
+            <select id="project" th:field="*{projectId}" required>
+                <option value="" disabled selected>Choose Project</option>
+                <option th:each="project : ${projects}" th:value="${project.id}" th:text="${project.projectName}"></option>
+            </select>
+
+            <label for="ticketCategory">Ticket Category:</label>
+            <select id="ticketCategory" th:field="*{ticketCategoryId}" required>
+                <option value="" disabled selected>Choose Ticket Category</option>
+                <option th:each="ticketCategory : ${ticketCategories}" th:value="${ticketCategory.id}" th:text="${ticketCategory.ticketName}"></option>
+            </select>
+			<label for="moduleName">Module Name:</label> <input type="text"
 				id="moduleName" th:field="*{moduleName}"
 				placeholder="Enter module name" /> <label for="subModuleName">Sub-Module
 				Name:</label> <input type="text" id="subModuleName"
